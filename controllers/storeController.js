@@ -25,6 +25,8 @@ exports.getStores = async (req, res) => {
 };
 
 exports.editStore = async (req, res) => {
+  // Set the location data to be a point
+  req.body.location.type = 'Point';
   // 1. Find the store given the ID
   const store = await Store.findOne({ _id: req.params.id });
   // 2. Confirm they are the owner of the store
