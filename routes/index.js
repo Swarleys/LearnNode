@@ -30,12 +30,12 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/register', userController.registerForm);
 
-// 1. Validate the registration data
-// 2. Register the user
-// 3. We need to log them in
 router.post('/register',
-  userController.validateRegister,
-  userController.register,
+// 1. Validate the registration data
+userController.validateRegister,
+// 2. Register the user
+userController.register,
+// 3. We need to log them in
   authController.login
 );
 
@@ -49,10 +49,11 @@ router.post('/account/reset/:token',
   authController.confirmedPasswords,
   catchErrors(authController.update)
 );
+router.get('/map', storeController.mapPage);
 
 //////////////////////// ******** API ******** ////////////////////////////
 
 router.get('/api/search', catchErrors(storeController.searchStores));
-
+router.get('/api/stores/near', catchErrors(storeController.mapStores));
 
 module.exports = router;
